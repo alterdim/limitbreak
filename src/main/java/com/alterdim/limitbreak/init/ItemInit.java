@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(modid = LimitBreak.MOD_ID, bus = Bus.MOD)
 @ObjectHolder(LimitBreak.MOD_ID)
-public class Iteminit 
+public class ItemInit 
 {
 	@ObjectHolder(LimitBreak.MOD_ID + "gayming_ingot")
 	public static Item gayming_ingot = null;
@@ -20,7 +20,7 @@ public class Iteminit
 	@SubscribeEvent
 	public static void registerItem(final RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("Gayming Ingot"));
+		event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("gayming_ingot"));
 	}
 
 }
