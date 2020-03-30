@@ -66,7 +66,7 @@ public class LimitBreak
 		@Override
 		public ItemStack createIcon() 
 		{
-			return new ItemStack(ItemInit.gayming_ingot);
+			return new ItemStack(BlockInit.gayming_block);
 		}
     }
 

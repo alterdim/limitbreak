@@ -27,7 +27,6 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(LimitBreak.MOD_ID)
 public class ItemInit 
 {
-	@ObjectHolder(LimitBreak.MOD_ID + "gayming_ingot")
 	public static final Item gayming_ingot = null;
 	
 	public static final Item gayming_sword = null;
@@ -41,24 +40,25 @@ public class ItemInit
 	{
 		event.getRegistry().register(new Item(new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_ingot"));
 		
-		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, 3.0f, 
+		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, 1.6f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_sword"));
 		
-		event.getRegistry().register(new PickaxeItem(LimitBreakItemTier.GAYMING, 5, 2.0f, 
+		event.getRegistry().register(new PickaxeItem(LimitBreakItemTier.GAYMING, 5, 1.2f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_pickaxe"));
 		
-		event.getRegistry().register(new ShovelItem(LimitBreakItemTier.GAYMING, 5, 2.0f, 
+		event.getRegistry().register(new ShovelItem(LimitBreakItemTier.GAYMING, 5, 1f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_shovel"));
 		
 		event.getRegistry().register(new AxeItem(LimitBreakItemTier.GAYMING, 9, 1.0f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_axe"));
 		
-		event.getRegistry().register(new HoeItem(LimitBreakItemTier.GAYMING, 5, 
+		event.getRegistry().register(new HoeItem(LimitBreakItemTier.GAYMING, 1, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_hoe"));
 	}
 	
 	public enum LimitBreakItemTier implements IItemTier
 	{
+		@ObjectHolder(value = "limitbreak")
 		GAYMING(4, 2000, 13.0F, 7.0F, 25, () -> {
 			return Ingredient.fromItems(ItemInit.gayming_ingot);
 		});
