@@ -1,6 +1,7 @@
 package com.alterdim.limitbreak.init;
 
 import com.alterdim.limitbreak.LimitBreak;
+import com.alterdim.limitbreak.LimitBreak.LimitBreakItemGroup;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -15,12 +16,12 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ItemInit 
 {
 	@ObjectHolder(LimitBreak.MOD_ID + "gayming_ingot")
-	public static Item gayming_ingot = null;
+	public static final Item gayming_ingot = null;
 	
 	@SubscribeEvent
 	public static void registerItem(final RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName("gayming_ingot"));
+		event.getRegistry().register(new Item(new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_ingot"));
 	}
 
 }

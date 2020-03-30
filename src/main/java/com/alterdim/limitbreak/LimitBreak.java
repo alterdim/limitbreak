@@ -2,8 +2,11 @@ package com.alterdim.limitbreak;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -15,6 +18,9 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.alterdim.limitbreak.init.BlockInit;
+import com.alterdim.limitbreak.init.ItemInit;
 
 import java.util.stream.Collectors;
 
@@ -28,9 +34,9 @@ public class LimitBreak
     public static LimitBreak instance;
 
     public LimitBreak() {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+    	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::setup);
+        modEventBus.addListener(this::doClientStuff);
         instance = this;
 
         // Register ourselves for server and other game events we are interested in
@@ -48,5 +54,20 @@ public class LimitBreak
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {}
+    
+    public static class LimitBreakItemGroup extends ItemGroup
+    {
+    	public static final LimitBreakItemGroup instance = new LimitBreakItemGroup(ItemGroup.GROUPS.length, "limitbreaktab");
+    	private LimitBreakItemGroup(int index, String label)
+    	{
+    		super(index, label);
+    	}
+
+		@Override
+		public ItemStack createIcon() 
+		{
+			return new ItemStack(ItemInit.gayming_ingot);
+		}
+    }
 
 }

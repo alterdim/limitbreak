@@ -1,6 +1,7 @@
 package com.alterdim.limitbreak.init;
 
 import com.alterdim.limitbreak.LimitBreak;
+import com.alterdim.limitbreak.LimitBreak.LimitBreakItemGroup;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -32,6 +33,6 @@ public class BlockInit
 	@SubscribeEvent
 	public static void registerBlockItems(final RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().register(new BlockItem(gayming_block, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)).setRegistryName("gayming_block"));
+		event.getRegistry().register(new BlockItem(gayming_block, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_block"));
 	}
 }

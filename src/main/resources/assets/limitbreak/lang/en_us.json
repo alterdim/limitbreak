@@ -1,5 +1,7 @@
 {
 	"item.limitbreak.gayming_ingot": "Gayming Ingot",
 	
-	"block.limitbreak.gayming_block": "Gayming Block"
+	"block.limitbreak.gayming_block": "Gayming Block",
+	
+	"itemGroup.limitbreaktab": "Limit Break"
 }
