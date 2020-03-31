@@ -54,11 +54,11 @@ public class MalevolentEye extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
-		if (playerIn.hurtResistantTime <= 0)
+		if (!playerIn.getCooldownTracker().hasCooldown(this) && !worldIn.isRemote)
 		{
 			
 			
-			List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getBoundingBox().expand(5000.0D, 5000.0D, 5000.0D));
+			List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getBoundingBox().expand(50000.0D, 50000.0D, 50000.0D));
 			double xPos = playerIn.getPosX();
 			double yPos = playerIn.getPosY();
 			double zPos = playerIn.getPosZ();
@@ -84,10 +84,10 @@ public class MalevolentEye extends Item
 			playerIn.attackEntityFrom(DamageSource.FALL, 4);
 			playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
 			SnowballEntity ball = new SnowballEntity(worldIn, playerIn);
-			ball.addVelocity(xPos - launcherXPos, yPos - launcherYPos, zPos - launcherZPos);
+			ball.addVelocity((xPos - launcherXPos)/10, (yPos - launcherYPos)/10, (zPos - launcherZPos)/10);
 			worldIn.addEntity(ball);
+			playerIn.getCooldownTracker().setCooldown(this, 20);
 		}
-		
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
