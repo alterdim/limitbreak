@@ -29,6 +29,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ItemInit 
 {
 	public static final Item gayming_ingot = null;
+	public static final Item malevolent_eye = null;
 	
 	public static final Item gayming_sword = null;
 	public static final Item gayming_pickaxe = null;
@@ -61,7 +62,6 @@ public class ItemInit
 	
 	public enum LimitBreakItemTier implements IItemTier
 	{
-		@ObjectHolder(value = "limitbreak")
 		GAYMING(4, 2000, 13.0F, 7.0F, 25, () -> {
 			return Ingredient.fromItems(ItemInit.gayming_ingot);
 		});

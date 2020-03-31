@@ -16,8 +16,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@ObjectHolder(LimitBreak.MOD_ID)
+
 @Mod.EventBusSubscriber(modid = LimitBreak.MOD_ID, bus = Bus.MOD)
+@ObjectHolder(LimitBreak.MOD_ID)
 public class BlockInit 
 {
 	public static final Block gayming_block = null;
