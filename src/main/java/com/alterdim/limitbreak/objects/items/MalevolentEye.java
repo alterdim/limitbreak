@@ -71,7 +71,7 @@ public class MalevolentEye extends Item
 			
 			PlayerEntity nearestPlayer = worldIn.getClosestPlayer(launcherXPos, launcherYPos, launcherZPos, 5000, predicate);
 			
-			if (nearestPlayer.equals(playerIn))
+			if (nearestPlayer == null)
 			{
 				 found = false;
 			}
@@ -84,7 +84,7 @@ public class MalevolentEye extends Item
 				playerIn.attackEntityFrom(DamageSource.FALL, 4);
 				playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
 				SnowballEntity ball = new SnowballEntity(worldIn, playerIn);
-				ball.addVelocity((nearestPlayer.getPosX() - launcherXPos)/10, (nearestPlayer.getPosY() - launcherYPos)/10, (nearestPlayer.getPosZ() - launcherZPos)/10);
+				ball.addVelocity((nearestPlayer.getPosX() - launcherXPos)/10, (nearestPlayer.getPosY() - launcherYPos)/10+20, (nearestPlayer.getPosZ() - launcherZPos)/10);
 				worldIn.addEntity(ball);
 			}
 			
