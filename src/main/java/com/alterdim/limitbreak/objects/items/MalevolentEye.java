@@ -4,15 +4,22 @@ import java.util.List;
 
 import com.alterdim.limitbreak.util.helpers.KeyboardHelper;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.dispenser.Position;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextComponent;
 import net.minecraft.world.World;
 
 public class MalevolentEye extends Item
@@ -47,8 +54,40 @@ public class MalevolentEye extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
-		playerIn.attackEntityFrom(DamageSource.FALL, 4);
-		playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
+		if (playerIn.hurtResistantTime <= 0)
+		{
+			
+			
+			List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getBoundingBox().expand(5000.0D, 5000.0D, 5000.0D));
+			double xPos = playerIn.getPosX();
+			double yPos = playerIn.getPosY();
+			double zPos = playerIn.getPosZ();
+			double launcherXPos = playerIn.getPosX();
+			double launcherYPos = playerIn.getPosY();
+			double launcherZPos = playerIn.getPosZ();
+			boolean found = false;
+			for (Entity passed : entities)
+			{
+				if (passed  instanceof PlayerEntity)
+				{
+					xPos = passed.getPosX();
+					yPos = passed.getPosY();
+					zPos = passed.getPosZ();
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+			{
+				playerIn.sendMessage(new StringTextComponent("No player found"));
+			}
+			playerIn.attackEntityFrom(DamageSource.FALL, 4);
+			playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
+			SnowballEntity ball = new SnowballEntity(worldIn, playerIn);
+			ball.addVelocity(xPos - launcherXPos, yPos - launcherYPos, zPos - launcherZPos);
+			worldIn.addEntity(ball);
+		}
+		
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
@@ -56,10 +95,9 @@ public class MalevolentEye extends Item
 	public boolean isDamageable() {
 		return true;
 	}
-
+	
 	@Override
-	public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-		this.setDamage(stack, 100);
-		super.onCreated(stack, worldIn, playerIn);
+	public int getItemStackLimit(ItemStack stack) {
+		return 1;
 	}
 }
