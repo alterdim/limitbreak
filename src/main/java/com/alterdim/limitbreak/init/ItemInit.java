@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.alterdim.limitbreak.LimitBreak;
 import com.alterdim.limitbreak.LimitBreak.LimitBreakItemGroup;
+import com.alterdim.limitbreak.objects.items.MalevolentEye;
 
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
@@ -39,6 +40,8 @@ public class ItemInit
 	public static void registerItem(final RegistryEvent.Register<Item> event)
 	{
 		event.getRegistry().register(new Item(new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_ingot"));
+		
+		event.getRegistry().register(new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("malevolent_eye"));
 		
 		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, 1.6f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_sword"));
