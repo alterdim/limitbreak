@@ -67,7 +67,7 @@ public class MalevolentEye extends Item
 			double launcherZPos = playerIn.getPosZ();
 			
 			
-			Predicate<Entity> predicate = i -> (i.equals(playerIn));
+			Predicate<Entity> predicate = i -> !(i.equals(playerIn));
 			
 			PlayerEntity nearestPlayer = worldIn.getClosestPlayer(launcherXPos, launcherYPos, launcherZPos, 5000, predicate);
 			
