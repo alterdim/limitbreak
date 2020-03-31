@@ -1,6 +1,9 @@
 package com.alterdim.limitbreak.objects.items;
 
 import java.util.List;
+import java.util.function.Predicate;
+
+import javax.annotation.Nullable;
 
 import com.alterdim.limitbreak.util.helpers.KeyboardHelper;
 
@@ -9,6 +12,7 @@ import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.dispenser.Position;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.Item;
@@ -57,35 +61,33 @@ public class MalevolentEye extends Item
 		if (!playerIn.getCooldownTracker().hasCooldown(this) && !worldIn.isRemote)
 		{
 			
-			
-			List<Entity> entities = worldIn.getEntitiesWithinAABBExcludingEntity(playerIn, playerIn.getBoundingBox().expand(50000.0D, 50000.0D, 50000.0D));
-			double xPos = playerIn.getPosX();
-			double yPos = playerIn.getPosY();
-			double zPos = playerIn.getPosZ();
+			boolean found = true;
 			double launcherXPos = playerIn.getPosX();
 			double launcherYPos = playerIn.getPosY();
 			double launcherZPos = playerIn.getPosZ();
-			boolean found = false;
-			for (Entity passed : entities)
+			
+			
+			Predicate<Entity> predicate = i -> (i.equals(playerIn));
+			
+			PlayerEntity nearestPlayer = worldIn.getClosestPlayer(launcherXPos, launcherYPos, launcherZPos, 5000, predicate);
+			
+			if (nearestPlayer.equals(playerIn))
 			{
-				if (passed  instanceof PlayerEntity)
-				{
-					xPos = passed.getPosX();
-					yPos = passed.getPosY();
-					zPos = passed.getPosZ();
-					found = true;
-					break;
-				}
+				 found = false;
 			}
 			if (!found)
 			{
 				playerIn.sendMessage(new StringTextComponent("No player found"));
 			}
-			playerIn.attackEntityFrom(DamageSource.FALL, 4);
-			playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
-			SnowballEntity ball = new SnowballEntity(worldIn, playerIn);
-			ball.addVelocity((xPos - launcherXPos)/10, (yPos - launcherYPos)/10, (zPos - launcherZPos)/10);
-			worldIn.addEntity(ball);
+			else
+			{
+				playerIn.attackEntityFrom(DamageSource.FALL, 4);
+				playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
+				SnowballEntity ball = new SnowballEntity(worldIn, playerIn);
+				ball.addVelocity((nearestPlayer.getPosX() - launcherXPos)/10, (nearestPlayer.getPosY() - launcherYPos)/10, (nearestPlayer.getPosZ() - launcherZPos)/10);
+				worldIn.addEntity(ball);
+			}
+			
 			playerIn.getCooldownTracker().setCooldown(this, 20);
 		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
