@@ -6,8 +6,12 @@ import com.alterdim.limitbreak.LimitBreak;
 import com.alterdim.limitbreak.LimitBreak.LimitBreakItemGroup;
 import com.alterdim.limitbreak.objects.items.MalevolentEye;
 
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
+import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -18,6 +22,8 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.Item.Properties;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +43,11 @@ public class ItemInit
 	public static final Item gayming_axe = null;
 	public static final Item gayming_hoe = null;
 	
+	public static final Item gayming_helmet = null;
+	public static final Item gayming_chestplate = null;
+	public static final Item gayming_leggings = null;
+	public static final Item gayming_boots = null;
+	
 	@SubscribeEvent
 	public static void registerItem(final RegistryEvent.Register<Item> event)
 	{
@@ -44,7 +55,7 @@ public class ItemInit
 		
 		event.getRegistry().register(new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance).maxDamage(5)).setRegistryName("malevolent_eye"));
 		
-		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, 1.6f, 
+		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, -2.0f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_sword"));
 		
 		event.getRegistry().register(new PickaxeItem(LimitBreakItemTier.GAYMING, 5, 1.2f, 
@@ -58,11 +69,20 @@ public class ItemInit
 		
 		event.getRegistry().register(new HoeItem(LimitBreakItemTier.GAYMING, 1, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_hoe"));
+		
+		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
+				EquipmentSlotType.HEAD, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_helmet"));
+		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
+				EquipmentSlotType.CHEST, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_chestplate"));
+		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
+				EquipmentSlotType.LEGS, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_leggings"));
+		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
+				EquipmentSlotType.FEET, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_boots"));
 	}
 	
 	public enum LimitBreakItemTier implements IItemTier
 	{
-		GAYMING(4, 2000, 13.0F, 7.0F, 25, () -> {
+		GAYMING(4, 2000, 13.0F, 17F, 25, () -> {
 			return Ingredient.fromItems(ItemInit.gayming_ingot);
 		});
 		
@@ -112,6 +132,78 @@ public class ItemInit
 		@Override
 		public Ingredient getRepairMaterial() {
 			return repairMaterial.getValue();
+		}
+
+	}
+	
+	public enum LimitBreakMaterial implements IArmorMaterial
+	{
+		GAYMING(LimitBreak.MOD_ID + ":gayming", 5, new int[] {7, 9, 11, 7}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.9F, () -> {
+			return Ingredient.fromItems(ItemInit.gayming_ingot));
+		});
+		
+		private static final int[] MAX_DAMAGE_ARRAY = new int[] {16, 16, 16, 16};
+		private final String name;
+		private final int maxDamageFactor;
+		private final int[] damageReductionAmountArray;
+		private final int enchantability;
+		private final SoundEvent soundEvent;
+		private final float toughness;
+		private final LazyValue<Ingredient> repairMaterial;
+		
+		private LimitBreakMaterial(String name, int maxDamageFactor, 
+				int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> repairMaterial)
+		{
+			this.name = name;
+			this.maxDamageFactor = maxDamageFactor;
+			this.damageReductionAmountArray = damageReductionAmountArray;
+			this.enchantability = enchantability;
+			this.soundEvent = soundEvent;
+			this.toughness = toughness;
+			this.repairMaterial = new LazyValue<>(repairMaterial);
+		}
+		
+
+		@Override
+		public int getDurability(EquipmentSlotType slotIn) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getEnchantability() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public SoundEvent getSoundEvent() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Ingredient getRepairMaterial() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String getName() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public float getToughness() {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 		
 	}
