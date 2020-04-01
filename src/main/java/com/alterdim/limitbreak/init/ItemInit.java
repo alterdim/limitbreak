@@ -42,7 +42,7 @@ public class ItemInit
 	{
 		event.getRegistry().register(new Item(new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_ingot"));
 		
-		event.getRegistry().register(new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance).maxDamage(20)).setRegistryName("malevolent_eye"));
+		event.getRegistry().register(new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance).maxDamage(5)).setRegistryName("malevolent_eye"));
 		
 		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, 1.6f, 
 				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_sword"));

@@ -45,11 +45,11 @@ public class MalevolentEye extends Item
 	{
 		if (KeyboardHelper.isHoldingShift())
 		{
-			tooltip.add(new StringTextComponent("Test"));
+			tooltip.add(new StringTextComponent("\u00A77" + "Launches a snowball in direction of the closest player. Has a max range of 5000 blocks."));
 		}
 		else
 		{
-			tooltip.add(new StringTextComponent("Hold SHIFT for more information."));
+			tooltip.add(new StringTextComponent("\u00A77" + "Hold " + "\u00A7e" + "SHIFT " + "\u00A77" + "for more information."));
 		}
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		
@@ -81,10 +81,9 @@ public class MalevolentEye extends Item
 			}
 			else
 			{
-				playerIn.attackEntityFrom(DamageSource.FALL, 4);
 				playerIn.getHeldItemMainhand().damageItem(1, playerIn, null);
 				SnowballEntity ball = new SnowballEntity(worldIn, playerIn);
-				ball.addVelocity((nearestPlayer.getPosX() - launcherXPos)/10, (nearestPlayer.getPosY() - launcherYPos)/10+20, (nearestPlayer.getPosZ() - launcherZPos)/10);
+				ball.addVelocity((nearestPlayer.getPosX() - launcherXPos)/100, (nearestPlayer.getPosY() - launcherYPos)/100+2, (nearestPlayer.getPosZ() - launcherZPos)/100);
 				worldIn.addEntity(ball);
 			}
 			
