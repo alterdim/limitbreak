@@ -8,22 +8,20 @@ import com.alterdim.limitbreak.objects.items.MalevolentEye;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemTier;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.Item.Properties;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -138,8 +136,8 @@ public class ItemInit
 	
 	public enum LimitBreakMaterial implements IArmorMaterial
 	{
-		GAYMING(LimitBreak.MOD_ID + ":gayming", 5, new int[] {7, 9, 11, 7}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.9F, () -> {
-			return Ingredient.fromItems(ItemInit.gayming_ingot));
+		GAYMING(LimitBreak.MOD_ID + ":gayming", 5, new int[] {7, 9, 11, 7}, 400, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.9F, () -> {
+			return Ingredient.fromItems(ItemInit.gayming_ingot);
 		});
 		
 		private static final int[] MAX_DAMAGE_ARRAY = new int[] {16, 16, 16, 16};
@@ -166,44 +164,38 @@ public class ItemInit
 
 		@Override
 		public int getDurability(EquipmentSlotType slotIn) {
-			// TODO Auto-generated method stub
-			return 0;
+			return MAX_DAMAGE_ARRAY[slotIn.getIndex()]*this.maxDamageFactor;
 		}
 
 		@Override
 		public int getDamageReductionAmount(EquipmentSlotType slotIn) {
-			// TODO Auto-generated method stub
-			return 0;
+			return this.damageReductionAmountArray[slotIn.getIndex()];
 		}
 
 		@Override
 		public int getEnchantability() {
-			// TODO Auto-generated method stub
-			return 0;
+			return this.enchantability;
 		}
 
 		@Override
 		public SoundEvent getSoundEvent() {
-			// TODO Auto-generated method stub
-			return null;
+			return this.soundEvent;
 		}
 
 		@Override
 		public Ingredient getRepairMaterial() {
-			// TODO Auto-generated method stub
-			return null;
+			return this.repairMaterial.getValue();
 		}
 
+		@OnlyIn(Dist.CLIENT)
 		@Override
 		public String getName() {
-			// TODO Auto-generated method stub
-			return null;
+			return this.name;
 		}
 
 		@Override
 		public float getToughness() {
-			// TODO Auto-generated method stub
-			return 0;
+			return this.toughness;
 		}
 		
 	}
