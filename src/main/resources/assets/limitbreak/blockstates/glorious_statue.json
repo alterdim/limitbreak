@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "limitbreak:block/glorious_statue" },
+		"facing=south": { "model": "limitbreak:block/glorious_statue", "y": 180 },
+		"facing=west": { "model": "limitbreak:block/glorious_statue", "y": 270 },
+		"facing=east": { "model": "limitbreak:block/glorious_statue", "y": 90 }
+	}
+}
