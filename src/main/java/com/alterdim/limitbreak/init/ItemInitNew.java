@@ -22,66 +22,46 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = LimitBreak.MOD_ID, bus = Bus.MOD)
-@ObjectHolder(LimitBreak.MOD_ID)
-public class ItemInit 
+public class ItemInitNew 
 {
-	public static final Item gayming_ingot = null;
-	public static final Item malevolent_eye = null;
+	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LimitBreak.MOD_ID);
 	
-	public static final Item gayming_sword = null;
-	public static final Item gayming_pickaxe = null;
-	public static final Item gayming_shovel = null;
-	public static final Item gayming_axe = null;
-	public static final Item gayming_hoe = null;
+	public static final RegistryObject<Item> GAYMING_INGOT = ITEMS.register("gayming_ingot", () -> 
+	new Item(new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> ULTRA_DIAMOND = ITEMS.register("ultra_diamond", () -> 
+	new Item(new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> MALEVOLENT_EYE = ITEMS.register("malevolent_eye", () -> 
+	new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance).maxDamage(5)));
 	
-	public static final Item gayming_helmet = null;
-	public static final Item gayming_chestplate = null;
-	public static final Item gayming_leggings = null;
-	public static final Item gayming_boots = null;
 	
-	@SubscribeEvent
-	public static void registerItem(final RegistryEvent.Register<Item> event)
-	{
-		event.getRegistry().register(new Item(new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_ingot"));
-		
-		event.getRegistry().register(new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance).maxDamage(5)).setRegistryName("malevolent_eye"));
-		
-		event.getRegistry().register(new SwordItem(LimitBreakItemTier.GAYMING, 7, -2.0f, 
-				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_sword"));
-		
-		event.getRegistry().register(new PickaxeItem(LimitBreakItemTier.GAYMING, 5, 1.2f, 
-				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_pickaxe"));
-		
-		event.getRegistry().register(new ShovelItem(LimitBreakItemTier.GAYMING, 5, 1f, 
-				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_shovel"));
-		
-		event.getRegistry().register(new AxeItem(LimitBreakItemTier.GAYMING, 9, 1.0f, 
-				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_axe"));
-		
-		event.getRegistry().register(new HoeItem(LimitBreakItemTier.GAYMING, 1, 
-				new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_hoe"));
-		
-		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
-				EquipmentSlotType.HEAD, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_helmet"));
-		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
-				EquipmentSlotType.CHEST, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_chestplate"));
-		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
-				EquipmentSlotType.LEGS, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_leggings"));
-		event.getRegistry().register(new ArmorItem(LimitBreakMaterial.GAYMING, 
-				EquipmentSlotType.FEET, new Item.Properties().group(LimitBreakItemGroup.instance)).setRegistryName("gayming_boots"));
-	}
+	public static final RegistryObject<Item> GAYMING_PICKAXE = ITEMS.register("gayming_pickaxe", () -> new PickaxeItem(LimitBreakItemTier.GAYMING, 5, 1.2f, 
+			new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_SWORD = ITEMS.register("gayming_sword", () -> new SwordItem(LimitBreakItemTier.GAYMING, 7, -2.0f, 
+			new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_AXE = ITEMS.register("gayming_axe", () -> new AxeItem(LimitBreakItemTier.GAYMING, 9, 1.0f, 
+			new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_SHOVEL = ITEMS.register("gayming_shovel", () -> new ShovelItem(LimitBreakItemTier.GAYMING, 5, 1f, 
+			new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_HOE = ITEMS.register("gayming_hoe", () -> new HoeItem(LimitBreakItemTier.GAYMING, 1, 
+			new Item.Properties().group(LimitBreakItemGroup.instance)));
+	
+	public static final RegistryObject<Item> GAYMING_HELMET = ITEMS.register("gayming_helmet", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+			EquipmentSlotType.HEAD, new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_CHESTPLATE = ITEMS.register("gayming_chestplate", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+			EquipmentSlotType.CHEST, new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_LEGGINGS = ITEMS.register("gayming_leggings", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+			EquipmentSlotType.LEGS, new Item.Properties().group(LimitBreakItemGroup.instance)));
+	public static final RegistryObject<Item> GAYMING_BOOTS = ITEMS.register("gayming_boots", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+			EquipmentSlotType.FEET, new Item.Properties().group(LimitBreakItemGroup.instance)));
 	
 	public enum LimitBreakItemTier implements IItemTier
 	{
 		GAYMING(4, 2000, 13.0F, 17F, 25, () -> {
-			return Ingredient.fromItems(ItemInit.gayming_ingot);
+			return Ingredient.fromItems(ItemInitNew.gayming_ingot);
 		});
 		
 		private final int harvestLevel;
@@ -199,5 +179,4 @@ public class ItemInit
 		}
 		
 	}
-
 }

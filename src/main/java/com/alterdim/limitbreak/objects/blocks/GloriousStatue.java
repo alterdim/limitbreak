@@ -15,6 +15,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
@@ -29,6 +31,7 @@ public class GloriousStatue extends Block
 {
 	
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	private boolean touched;
 	
 	private static final VoxelShape SHAPE_N = Stream.of(
 			Block.makeCuboidShape(3, 0, 3, 13, 1, 13),
@@ -73,6 +76,7 @@ public class GloriousStatue extends Block
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) 
 	{
+		this.touched = false;
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 	
@@ -98,12 +102,13 @@ public class GloriousStatue extends Block
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult p_225533_6_) 
 	{
-		if (!worldIn.isRemote())
+		if (!this.touched)
 		{
-			ServerWorld serverworld = (ServerWorld)worldIn;
-			LightningBoltEntity lightning = new LightningBoltEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), false);
-			serverworld.addLightningBolt(lightning);
+			worldIn.playSound(player, pos, SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.HOSTILE, 1, 1);
+			worldIn.destroyBlock(pos, false);
+			this.touched = true;
 		}
+		
 		return ActionResultType.SUCCESS;
 	}
 
