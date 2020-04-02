@@ -3,6 +3,7 @@ package com.alterdim.limitbreak;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.alterdim.limitbreak.init.BiomeInit;
 import com.alterdim.limitbreak.init.BlockInitNew;
 import com.alterdim.limitbreak.init.ItemInitNew;
 
@@ -10,6 +11,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -39,6 +41,7 @@ public class LimitBreak
         
         ItemInitNew.ITEMS.register(modEventBus);
         BlockInitNew.BLOCKS.register(modEventBus);
+        BiomeInit.BIOMES.register(modEventBus);
         instance = this;
 
         // Register ourselves for server and other game events we are interested in
@@ -58,6 +61,12 @@ public class LimitBreak
     	});
     	
     	LOGGER.debug("Registered BlockItems !");
+    }
+    
+    @SubscribeEvent
+    public static void onRegisterBiomes(final RegistryEvent.Register<Biome> event)
+    {
+    	BiomeInit.registerBiomes();
     }
 
     private void setup(final FMLCommonSetupEvent event)

@@ -1,26 +1,20 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "#L#",
+        "DDD",
         "DBD",
-        "BBB"
+        "DDD"
     ],
     "key": {
-        "#": {
-            "item": "minecraft:dragon_head"
-        },
-        "L": {
-            "item": "limitbreak:ultra_diamond"
-        },
         "D": {
-            "item": "minecraft:dragon_breath"
+            "item": "minecraft:diamond_block"
         },
         "B": {
-            "item": "minecraft:black_glazed_terracotta"
+            "item": "minecraft:eye_of_ender"
         }
     },
     "result": {
-        "item": "limitbreak:glorious_statue",
+        "item": "limitbreak:ultra_diamond",
         "count": 1
     }
 }
