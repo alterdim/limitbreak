@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "limitbreak:items/gayming_hoe"
+		"layer0": "limitbreak:items/asari_shovel"
 	}
 }

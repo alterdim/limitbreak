@@ -83,7 +83,7 @@ public class LimitBreak
 		@Override
 		public ItemStack createIcon() 
 		{
-			return new ItemStack(ItemInitNew.GAYMING_INGOT.get());
+			return new ItemStack(ItemInitNew.ASARI_INGOT.get());
 		}
     }
 

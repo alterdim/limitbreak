@@ -102,12 +102,13 @@ public class GloriousStatue extends Block
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult p_225533_6_) 
 	{
-		if (!this.touched)
+		if (!this.touched && !worldIn.isRemote)
 		{
-			worldIn.playSound(player, pos, SoundEvents.ENTITY_WITHER_SPAWN, SoundCategory.HOSTILE, 1, 1);
-			worldIn.destroyBlock(pos, false);
 			this.touched = true;
+			worldIn.destroyBlock(pos, false);
+			
 		}
+		worldIn.playSound(player, pos, SoundEvents.ENTITY_GHAST_AMBIENT, SoundCategory.HOSTILE, 1, 1);
 		
 		return ActionResultType.SUCCESS;
 	}

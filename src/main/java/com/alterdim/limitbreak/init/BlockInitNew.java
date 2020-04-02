@@ -13,9 +13,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockInitNew 
 {
+	
 public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, LimitBreak.MOD_ID);
 	
-	public static final RegistryObject<Block> GAYMING_BLOCK = BLOCKS.register("gayming_block", () -> 
+	public static final RegistryObject<Block> ASARI_BLOCK = BLOCKS.register("asari_block", () -> 
 	new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5, 6).harvestLevel(3).harvestTool(ToolType.PICKAXE)
 			.sound(SoundType.METAL)));
 	public static final RegistryObject<Block> GLORIOUS_STATUE = BLOCKS.register("glorious_statue", () -> 

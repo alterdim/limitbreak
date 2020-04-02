@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "limitbreak:blocks/gayming_block"
+        "all": "limitbreak:blocks/asari_block"
     }
 }

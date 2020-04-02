@@ -30,7 +30,7 @@ public class ItemInitNew
 {
 	public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LimitBreak.MOD_ID);
 	
-	public static final RegistryObject<Item> GAYMING_INGOT = ITEMS.register("gayming_ingot", () -> 
+	public static final RegistryObject<Item> ASARI_INGOT = ITEMS.register("asari_ingot", () -> 
 	new Item(new Item.Properties().group(LimitBreakItemGroup.instance)));
 	public static final RegistryObject<Item> ULTRA_DIAMOND = ITEMS.register("ultra_diamond", () -> 
 	new Item(new Item.Properties().group(LimitBreakItemGroup.instance)));
@@ -38,30 +38,30 @@ public class ItemInitNew
 	new MalevolentEye(new Item.Properties().group(LimitBreakItemGroup.instance).maxDamage(5)));
 	
 	
-	public static final RegistryObject<Item> GAYMING_PICKAXE = ITEMS.register("gayming_pickaxe", () -> new PickaxeItem(LimitBreakItemTier.GAYMING, 5, 1.2f, 
+	public static final RegistryObject<Item> ASARI_PICKAXE = ITEMS.register("asari_pickaxe", () -> new PickaxeItem(LimitBreakItemTier.ASARI, 5, 1.2f, 
 			new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_SWORD = ITEMS.register("gayming_sword", () -> new SwordItem(LimitBreakItemTier.GAYMING, 7, -2.0f, 
+	public static final RegistryObject<Item> ASARI_SWORD = ITEMS.register("asari_sword", () -> new SwordItem(LimitBreakItemTier.ASARI, 7, -2.0f, 
 			new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_AXE = ITEMS.register("gayming_axe", () -> new AxeItem(LimitBreakItemTier.GAYMING, 9, 1.0f, 
+	public static final RegistryObject<Item> ASARI_AXE = ITEMS.register("asari_axe", () -> new AxeItem(LimitBreakItemTier.ASARI, 9, 1.0f, 
 			new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_SHOVEL = ITEMS.register("gayming_shovel", () -> new ShovelItem(LimitBreakItemTier.GAYMING, 5, 1f, 
+	public static final RegistryObject<Item> ASARI_SHOVEL = ITEMS.register("asari_shovel", () -> new ShovelItem(LimitBreakItemTier.ASARI, 5, 1f, 
 			new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_HOE = ITEMS.register("gayming_hoe", () -> new HoeItem(LimitBreakItemTier.GAYMING, 1, 
+	public static final RegistryObject<Item> ASARI_HOE = ITEMS.register("asari_hoe", () -> new HoeItem(LimitBreakItemTier.ASARI, 1, 
 			new Item.Properties().group(LimitBreakItemGroup.instance)));
 	
-	public static final RegistryObject<Item> GAYMING_HELMET = ITEMS.register("gayming_helmet", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+	public static final RegistryObject<Item> ASARI_HELMET = ITEMS.register("asari_helmet", () -> new ArmorItem(LimitBreakMaterial.ASARI, 
 			EquipmentSlotType.HEAD, new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_CHESTPLATE = ITEMS.register("gayming_chestplate", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+	public static final RegistryObject<Item> ASARI_CHESTPLATE = ITEMS.register("asari_chestplate", () -> new ArmorItem(LimitBreakMaterial.ASARI, 
 			EquipmentSlotType.CHEST, new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_LEGGINGS = ITEMS.register("gayming_leggings", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+	public static final RegistryObject<Item> ASARI_LEGGINGS = ITEMS.register("asari_leggings", () -> new ArmorItem(LimitBreakMaterial.ASARI, 
 			EquipmentSlotType.LEGS, new Item.Properties().group(LimitBreakItemGroup.instance)));
-	public static final RegistryObject<Item> GAYMING_BOOTS = ITEMS.register("gayming_boots", () -> new ArmorItem(LimitBreakMaterial.GAYMING, 
+	public static final RegistryObject<Item> ASARI_BOOTS = ITEMS.register("asari_boots", () -> new ArmorItem(LimitBreakMaterial.ASARI, 
 			EquipmentSlotType.FEET, new Item.Properties().group(LimitBreakItemGroup.instance)));
 	
 	public enum LimitBreakItemTier implements IItemTier
 	{
-		GAYMING(4, 2000, 13.0F, 17F, 25, () -> {
-			return Ingredient.fromItems(ItemInitNew.gayming_ingot);
+		ASARI(4, 2000, 13.0F, 17F, 25, () -> {
+			return Ingredient.fromItems(ItemInitNew.ASARI_INGOT.get());
 		});
 		
 		private final int harvestLevel;
@@ -116,8 +116,8 @@ public class ItemInitNew
 	
 	public enum LimitBreakMaterial implements IArmorMaterial
 	{
-		GAYMING(LimitBreak.MOD_ID + ":gayming", 5, new int[] {7, 9, 11, 7}, 400, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.9F, () -> {
-			return Ingredient.fromItems(ItemInit.gayming_ingot);
+		ASARI(LimitBreak.MOD_ID + ":asari", 5, new int[] {7, 9, 11, 7}, 400, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.9F, () -> {
+			return Ingredient.fromItems(ItemInitNew.ASARI_INGOT.get());
 		});
 		
 		private static final int[] MAX_DAMAGE_ARRAY = new int[] {16, 16, 16, 16};
